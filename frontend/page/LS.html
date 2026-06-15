@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lịch sử Tra cứu - MedCheck Clinic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-size: 24px;
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        vertical-align: middle;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9f9ff;
+      }
+      .sidebar-active {
+        box-shadow: inset 4px 0 0 0 #00478d;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary": "#ffffff",
+              "surface-container-high": "#dfe8ff",
+              secondary: "#00658d",
+              "on-error-container": "#93000a",
+              "tertiary-fixed": "#d9e4eb",
+              "surface-bright": "#f9f9ff",
+              surface: "#f9f9ff",
+              "on-primary": "#ffffff",
+              "surface-dim": "#cadbfc",
+              "primary-fixed-dim": "#a9c7ff",
+              "surface-container-lowest": "#ffffff",
+              background: "#f9f9ff",
+              "primary-container": "#005eb8",
+              "surface-tint": "#005db6",
+              "secondary-fixed-dim": "#81cfff",
+              "on-primary-fixed-variant": "#00468c",
+              "on-secondary-container": "#004b69",
+              "tertiary-container": "#566167",
+              "inverse-surface": "#20314b",
+              "error-container": "#ffdad6",
+              "outline-variant": "#c2c6d4",
+              "on-tertiary-fixed": "#131d22",
+              "on-error": "#ffffff",
+              "surface-container-low": "#f0f3ff",
+              "primary-fixed": "#d6e3ff",
+              "on-primary-container": "#c8daff",
+              "on-secondary-fixed": "#001e2d",
+              "secondary-container": "#41befd",
+              "on-tertiary-container": "#d1dce3",
+              "on-surface-variant": "#424752",
+              "on-secondary-fixed-variant": "#004c6b",
+              error: "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "inverse-primary": "#a9c7ff",
+              "on-background": "#091c35",
+              tertiary: "#3f494f",
+              "surface-container-highest": "#d6e3ff",
+              "inverse-on-surface": "#ecf0ff",
+              "surface-container": "#e7eeff",
+              "on-primary-fixed": "#001b3d",
+              "surface-variant": "#d6e3ff",
+              "secondary-fixed": "#c6e7ff",
+              outline: "#727783",
+              "on-surface": "#091c35",
+              "tertiary-fixed-dim": "#bdc8cf",
+              primary: "#00478d",
+              "on-tertiary-fixed-variant": "#3e484e",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              sm: "8px",
+              xs: "4px",
+              "container-max": "1440px",
+              lg: "24px",
+              md: "16px",
+              xl: "48px",
+              base: "4px",
+              gutter: "24px",
+            },
+            fontFamily: {
+              "title-lg": ["inter"],
+              "headline-lg-mobile": ["manrope"],
+              "body-lg": ["inter"],
+              "label-md": ["inter"],
+              "display-lg": ["manrope"],
+              "body-md": ["inter"],
+              "headline-md": ["manrope"],
+              "headline-lg": ["manrope"],
+              "code-sm": ["jetbrainsMono"],
+            },
+            fontSize: {
+              "title-lg": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+              "headline-lg-mobile": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "600" },
+              ],
+              "code-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-surface min-h-screen flex flex-col">
+    <!-- TopNavBar -->
+    <header
+      class="bg-surface sticky top-0 border-b border-outline-variant z-50"
+    >
+      <div class="flex justify-between items-center w-full px-lg h-16">
+        <div class="flex items-center gap-md">
+          <span class="text-headline-md font-bold text-primary"
+            >MedCheck Clinic</span
+          >
+        </div>
+        <div class="flex items-center gap-md">
+          <button
+            class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high w-10 h-10 rounded-full transition-colors"
+            data-icon="notifications"
+          >
+            notifications
+          </button>
+          <button
+            class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high w-10 h-10 rounded-full transition-colors"
+            data-icon="settings"
+          >
+            settings
+          </button>
+          <div class="h-8 w-px bg-outline-variant mx-xs hidden sm:block"></div>
+          <div
+            class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high p-xs pr-md rounded-full transition-colors group"
+          >
+            <img
+              alt="User"
+              class="w-8 h-8 rounded-full object-cover border border-outline-variant"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaNVA4djn5OuUUr2ABVg093FatYz8a5022UVd4-8oHYC3FuGYBNf52Dt_6fPhzhz0-7V3Z3UdDPg0P3jAoGup67yMGDeRb4TiJ2r2DmV0W4dxONnV6hcSjpHAyeYlsx8Kscb3UJjwx06FxwpuM79TFZNckK9CPb3jbYtba7nRzHtOwd1S8Xy7AL1fiE1-PqcQSA8W7aC8zEHmXpdGMXB23ixSnA-tHVWIYHiuB5KBLgvoPm78sCzsolql_oS3zNqhW0M91wgx8rJNM"
+            />
+            <span id="currentUser"> Người dùng </span>
+            <span
+              class="material-symbols-outlined text-outline group-hover:text-primary transition-colors"
+              >logout</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="flex w-full flex-1">
+      <!-- SideNavBar -->
+      <aside
+        class="w-64 bg-surface-container-low border-r border-outline-variant flex flex-col p-md shrink-0"
+      >
+        <nav class="p-4 space-y-1">
+          <a
+            href="trangchu.html"
+            class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Trang chủ</span>
+          </a>
+
+          <a
+            href="QLThuoc.html"
+            class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+          >
+            <span class="material-symbols-outlined">medication</span>
+            <span>Quản lý Thuốc</span>
+          </a>
+
+          <a
+            href="QLBenh.html"
+            class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+          >
+            <span class="material-symbols-outlined">personal_injury</span>
+            <span>Quản lý Bệnh</span>
+          </a>
+
+          <a
+            href="KTTTThuocBenh.html"
+            class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+          >
+            <span class="material-symbols-outlined">warning</span>
+            <span>Tương tác Thuốc - Bệnh</span>
+          </a>
+
+          <a
+            href="LS.html"
+            class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+          >
+            <span class="material-symbols-outlined">history</span>
+            <span>Lịch sử Tra cứu</span>
+          </a>
+
+          <a
+            href="dangnhap.html"
+            class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-50 text-red-600 text-base font-medium"
+          >
+            <span class="material-symbols-outlined">logout</span>
+            <span>Đăng xuất</span>
+          </a>
+        </nav>
+      </aside>
+      <!-- Main Content -->
+      <main class="flex-1 p-lg bg-background overflow-x-hidden flex flex-col">
+        <div class="flex-1">
+          <header class="mb-lg flex justify-between items-center">
+            <div>
+              <nav
+                class="flex items-center gap-xs text-on-surface-variant mb-xs"
+              >
+                <span class="font-label-md text-label-md">MedCheck</span>
+                <span class="material-symbols-outlined text-sm"
+                  >chevron_right</span
+                >
+                <span class="font-label-md text-label-md">Tra cứu</span>
+                <span class="material-symbols-outlined text-sm"
+                  >chevron_right</span
+                >
+                <span class="font-label-md text-label-md text-primary font-bold"
+                  >Lịch sử</span
+                >
+              </nav>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                Lịch sử Tra cứu
+              </h2>
+            </div>
+            <div class="flex gap-md">
+              <button
+                class="flex items-center gap-sm px-md py-2 bg-error text-on-error rounded-lg hover:opacity-90 transition-opacity font-semibold shadow-sm"
+                onclick="confirmClearHistory()"
+              >
+                <span class="material-symbols-outlined">delete_sweep</span>
+                <span class="">Xóa toàn bộ</span>
+              </button>
+            </div>
+          </header>
+          <!-- Search and Stats Bento Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-lg">
+            <div
+              class="md:col-span-9 bg-surface border border-outline-variant rounded-xl p-md flex flex-wrap md:flex-nowrap items-center gap-md shadow-sm"
+            >
+              <div class="flex-1 relative w-full">
+                <span
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <span class="material-symbols-outlined text-outline"
+                    >search</span
+                  >
+                </span>
+                <input
+                  id="searchInput"
+                  class="block w-full pl-10 pr-3 py-2.5 border border-outline rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-transparent text-body-md"
+                  placeholder="Tìm tên thuốc, bệnh nhân, hoặc bác sĩ thực hiện..."
+                  type="text"
+                  onkeyup="searchHistory()"
+                />
+              </div>
+              <div class="flex items-center gap-md w-full md:w-auto">
+                <select
+                  id="timeFilter"
+                  onchange="filterByTime()"
+                  class="border border-outline rounded-lg py-2.5 px-md text-body-md bg-surface-container-lowest min-w-[160px] focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                >
+                  <option>Tất cả thời gian</option>
+                  <option>Hôm nay</option>
+                  <option>7 ngày qua</option>
+                  <option>Tháng này</option>
+                </select>
+                <button
+                  class="bg-primary-container text-on-primary-container p-2.5 rounded-lg hover:brightness-95 transition-all"
+                >
+                  <span class="material-symbols-outlined">search</span>
+                </button>
+              </div>
+            </div>
+            <div
+              class="md:col-span-3 bg-primary-container text-on-primary-container rounded-xl p-md flex flex-col justify-center shadow-sm"
+            >
+              <div class="bg-blue-700 text-white rounded-xl p-6 shadow-lg">
+                <h3 class="text-sm uppercase opacity-80 mb-4 font-bold">
+                  Thống kê
+                </h3>
+
+                <div class="flex justify-between mb-2">
+                  <span>Tổng truy vấn</span>
+
+                  <span id="total-history" class="font-bold"> 0 </span>
+                </div>
+
+                <div class="flex justify-between mb-2">
+                  <span>Nghiêm trọng</span>
+
+                  <span id="severe-count" class="font-bold text-red-200">
+                    0
+                  </span>
+                </div>
+
+                <div class="flex justify-between">
+                  <span>Không tương tác</span>
+
+                  <span id="normal-count" class="font-bold text-green-200">
+                    0
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- History Table -->
+          <div
+            class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm"
+          >
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead
+                  class="bg-surface-container-low border-b border-outline-variant"
+                >
+                  <tr>
+                    <th
+                      class="px-lg py-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider"
+                    >
+                      Ngày / Giờ
+                    </th>
+                    <th
+                      class="px-lg py-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider"
+                    >
+                      Người tra cứu
+                    </th>
+                    <th
+                      class="px-lg py-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider"
+                    >
+                      Nội dung
+                    </th>
+                    <th
+                      class="px-lg py-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider"
+                    >
+                      Kết quả tóm tắt
+                    </th>
+                    <th
+                      class="px-lg py-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider text-right"
+                    >
+                      Thao tác
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="historyTableBody"
+                  class="divide-y divide-outline-variant"
+                >
+                  <tr id="emptyHistory">
+                    <td colspan="5" class="text-center py-10">
+                      <span
+                        class="material-symbols-outlined text-5xl text-gray-400"
+                      >
+                        history
+                      </span>
+
+                      <p class="mt-3 text-gray-500">Chưa có lịch sử tra cứu</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Pagination -->
+            <div
+              class="flex flex-col sm:flex-row justify-between items-center gap-md px-lg py-md bg-surface border-t border-outline-variant"
+            >
+              <span
+                id="history-count"
+                class="text-label-md text-on-surface-variant"
+              >
+                Chưa có dữ liệu
+              </span>
+              <div class="flex items-center gap-xs">
+                <div
+                  id="pagination-container"
+                  class="flex items-center gap-xs"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-high w-full py-lg border-t border-outline-variant mt-auto"
+    >
+      <div style="padding: 10px; text-align: center">
+        © 2026 MedCheck Clinic - Hệ thống tra cứu tương tác thuốc bệnh
+      </div>
+    </footer>
+    <!-- Detail Modal -->
+    <div
+      class="fixed inset-0 bg-on-background/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-md"
+      id="detailModal"
+    >
+      <div
+        class="bg-surface w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
+      >
+        <div
+          class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low"
+        >
+          <h3 id="modal-title" class="font-headline-md text-headline-md">
+            Chi tiết tra cứu
+          </h3>
+          <button
+            class="p-1 hover:bg-surface-container rounded-full text-on-surface-variant transition-colors"
+            onclick="closeModal()"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-lg space-y-md">
+          <div class="grid grid-cols-2 gap-lg">
+            <div>
+              <p
+                class="text-[11px] text-outline font-bold uppercase mb-1 tracking-wider"
+              >
+                Thời gian
+              </p>
+              <span id="modal-time">--</span>
+            </div>
+            <div>
+              <p
+                class="text-[11px] text-outline font-bold uppercase mb-1 tracking-wider"
+              >
+                Người thực hiện
+              </p>
+              <span id="modal-user">--</span>
+            </div>
+          </div>
+          <div>
+            <p
+              class="text-[11px] text-outline font-bold uppercase mb-1 tracking-wider"
+            >
+              Dữ liệu tra cứu
+            </p>
+            <div
+              class="bg-surface-container-low p-md rounded-lg flex flex-wrap gap-sm border border-outline-variant"
+            >
+              <div id="modal-content">Chưa có dữ liệu</div>
+              <div id="modal-result">Chưa có dữ liệu</div>
+            </div>
+          </div>
+          <div>
+            <p
+              class="text-[11px] text-outline font-bold uppercase mb-1 tracking-wider"
+            >
+              Cảnh báo chi tiết
+            </p>
+            <div
+              class="border-l-4 border-error bg-error-container/10 p-md rounded-r-lg border-y border-r border-error/20"
+            >
+              <div class="flex items-center gap-sm mb-1 text-error font-bold">
+                <span class="material-symbols-outlined text-sm">warning</span>
+                Mức độ: Rất nghiêm trọng (Major)
+              </div>
+              <p class="text-body-md text-on-surface leading-relaxed">
+                Việc kết hợp Paracetamol và Ibuprofen trong thời gian dài hoặc
+                liều cao có thể làm tăng nguy cơ tổn thương thận và loét dạ dày
+                tá tràng. Cần theo dõi sát chức năng thận của bệnh nhân.
+              </p>
+            </div>
+          </div>
+          <div class="pt-md">
+            <img
+              alt="Clinical visualization"
+              class="w-full h-40 object-cover rounded-xl border border-outline-variant"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuASSIfKfZIKRHEYRJUlAkFzKT4o8NkI9SYTeIVPCGfmoMDTTYmidE23QkZ2GKcdJ-nr9my4PIIEa6oFqj34k7pBB3XY98tZfFRM_HJ7JlpK0azKID9Nq3IzC9gHNdS8xW1f3ioFkODmE_CszFNoYHPxrmxcsW-jK58Fvb23K7GpZoue-nfeXkCZomBUbP20RuTdt-c_NUiETqHWYIg9-E-OVgOwlGG33LOy4DP9wxtlNCUbPfkd3Kgy7PiiLXc6j7VhP0F-Qg1viWNl"
+            />
+          </div>
+        </div>
+        <div
+          class="p-lg bg-surface-container-low border-t border-outline-variant flex justify-end gap-md"
+        >
+          <button
+            class="px-8 py-2 border border-outline rounded-lg font-semibold hover:bg-surface-variant transition-all text-on-surface"
+            onclick="closeModal()"
+          >
+            Đóng
+          </button>
+          <button
+            class="px-8 py-2 bg-primary text-on-primary rounded-lg font-semibold hover:opacity-90 flex items-center gap-sm shadow-md transition-all active:scale-95"
+          >
+            <span class="material-symbols-outlined">print</span> In báo cáo
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="../js/lichsu.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

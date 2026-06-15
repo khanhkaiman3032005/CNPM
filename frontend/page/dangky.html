@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Đăng ký Tài khoản - MedCheck Clinic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=inter:wght@100..900&amp;family=manrope:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#566167",
+              "secondary-fixed": "#c6e7ff",
+              "primary-fixed": "#d6e3ff",
+              "on-tertiary-fixed-variant": "#3e484e",
+              "inverse-on-surface": "#ecf0ff",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#ffdad6",
+              "inverse-surface": "#20314b",
+              "on-primary-fixed": "#001b3d",
+              "primary-fixed-dim": "#a9c7ff",
+              "surface-container-low": "#f0f3ff",
+              "on-background": "#091c35",
+              "surface-container-high": "#dfe8ff",
+              error: "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              secondary: "#00658d",
+              "on-secondary-fixed": "#001e2d",
+              tertiary: "#3f494f",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "surface-bright": "#f9f9ff",
+              primary: "#00478d",
+              "on-primary-fixed-variant": "#00468c",
+              "on-tertiary-fixed": "#131d22",
+              "surface-tint": "#005db6",
+              "tertiary-fixed": "#d9e4eb",
+              "surface-container-highest": "#d6e3ff",
+              "secondary-container": "#41befd",
+              "on-primary-container": "#c8daff",
+              background: "#f9f9ff",
+              "inverse-primary": "#a9c7ff",
+              "on-surface": "#091c35",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#424752",
+              outline: "#727783",
+              "on-secondary-container": "#004b69",
+              "surface-dim": "#cadbfc",
+              "on-error-container": "#93000a",
+              "outline-variant": "#c2c6d4",
+              "on-tertiary-container": "#d1dce3",
+              "surface-variant": "#d6e3ff",
+              "tertiary-fixed-dim": "#bdc8cf",
+              "on-secondary-fixed-variant": "#004c6b",
+              "secondary-fixed-dim": "#81cfff",
+              surface: "#f9f9ff",
+              "surface-container": "#e7eeff",
+              "primary-container": "#005eb8",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              md: "16px",
+              "container-max": "1440px",
+              base: "4px",
+              gutter: "24px",
+              xs: "4px",
+              sm: "8px",
+              lg: "24px",
+              xl: "48px",
+            },
+            fontFamily: {
+              "headline-md": ["manrope"],
+              "label-md": ["inter"],
+              "headline-lg-mobile": ["manrope"],
+              "display-lg": ["manrope"],
+              "body-lg": ["inter"],
+              "body-md": ["inter"],
+              "title-lg": ["inter"],
+              "headline-lg": ["manrope"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "title-lg": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+              "headline-lg": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        vertical-align: middle;
+      }
+      .medical-grid-pattern {
+        background-image: radial-gradient(#d6e3ff 0.5px, transparent 0.5px);
+        background-size: 24px 24px;
+      }
+      .form-focus-ring:focus-within {
+        box-shadow: 0 0 0 2px #00478d20;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface font-inter text-on-surface selection:bg-primary-fixed min-h-screen flex flex-col"
+  >
+    <!-- Top Navigation (Shell Suprresion Rule: Not rendered for transactional screen) -->
+    <main class="flex-grow flex flex-col lg:flex-row">
+      <!-- Left Side: Branding and Atmosphere -->
+      <div
+        class="hidden lg:flex lg:w-1/2 bg-primary-container relative overflow-hidden items-center justify-center p-xl"
+      >
+        <div class="absolute inset-0 medical-grid-pattern opacity-30"></div>
+        <div class="relative z-10 max-w-lg">
+          <div class="flex items-center gap-md mb-lg">
+            <div
+              class="w-12 h-12 bg-surface rounded-full flex items-center justify-center text-primary shadow-lg"
+            >
+              <span class="material-symbols-outlined text-[32px]"
+                >health_and_safety</span
+              >
+            </div>
+            <span
+              class="font-headline-md text-headline-md text-on-primary-container tracking-tight"
+              >MedCheck Clinic</span
+            >
+          </div>
+          <h1
+            class="font-headline-lg text-headline-lg text-surface leading-tight mb-md"
+          >
+            Hệ thống quản lý y tế chuyên sâu cho đội ngũ lâm sàng.
+          </h1>
+          <p class="font-body-lg text-body-lg text-primary-fixed mb-xl">
+            Tham gia mạng lưới chuyên gia của chúng tôi để tối ưu hóa quy trình
+            khám chữa bệnh và quản lý hồ sơ bệnh nhân một cách khoa học nhất.
+          </p>
+          <div class="grid grid-cols-2 gap-lg">
+            <div
+              class="p-md bg-white/10 backdrop-blur-md rounded-xl border border-white/20"
+            >
+              <span class="material-symbols-outlined text-surface mb-sm"
+                >verified_user</span
+              >
+              <h3 class="font-title-lg text-title-lg text-surface">
+                Bảo mật ISO
+              </h3>
+              <p class="font-label-md text-label-md text-primary-fixed">
+                Tiêu chuẩn dữ liệu y tế quốc tế.
+              </p>
+            </div>
+            <div
+              class="p-md bg-white/10 backdrop-blur-md rounded-xl border border-white/20"
+            >
+              <span class="material-symbols-outlined text-surface mb-sm"
+                >speed</span
+              >
+              <h3 class="font-title-lg text-title-lg text-surface">
+                Xử lý nhanh
+              </h3>
+              <p class="font-label-md text-label-md text-primary-fixed">
+                Tra cứu tương tác thuốc tức thì.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Abstract background shape -->
+        <div
+          class="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary-container opacity-20 rounded-full blur-3xl"
+        ></div>
+      </div>
+      <!-- Right Side: Registration Form -->
+      <div
+        class="flex-grow flex items-center justify-center p-md lg:p-xl bg-surface-bright"
+      >
+        <div class="w-full max-w-md">
+          <div class="mb-lg text-center lg:text-left">
+            <h2 class="font-headline-md text-headline-md text-on-surface mb-xs">
+              Tạo tài khoản chuyên gia
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Vui lòng cung cấp thông tin chính xác để xác minh danh tính hành
+              nghề.
+            </p>
+          </div>
+          <form
+            id="registerForm"
+            class="space-y-md"
+            onsubmit="event.preventDefault();"
+          >
+            <!-- Name -->
+            <div class="space-y-xs">
+              <label
+                class="font-label-md text-label-md text-on-surface-variant ml-1"
+                for="full_name"
+                >Họ và tên</label
+              >
+              <div class="relative group">
+                <span
+                  class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors"
+                  >person</span
+                >
+                <input
+                  class="w-full pl-12 pr-md py-md bg-white border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-0 transition-all outline-none"
+                  id="fullname"
+                  name="fullname"
+                  placeholder="Bác sĩ Nguyễn Văn A"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+              <!-- Employee ID -->
+              <div class="space-y-xs">
+                <label
+                  class="font-label-md text-label-md text-on-surface-variant ml-1"
+                  for="emp_id"
+                  >Mã nhân viên/Bác sĩ</label
+                >
+                <div class="relative group">
+                  <span
+                    class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors"
+                    >badge</span
+                  >
+                  <input
+                    class="w-full pl-12 pr-md py-md bg-white border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-0 transition-all outline-none"
+                    id="username"
+                    name="username"
+                    placeholder="admin"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <!-- Work Email -->
+              <div class="space-y-xs">
+                <label
+                  class="font-label-md text-label-md text-on-surface-variant ml-1"
+                  for="work_email"
+                  >Email công việc</label
+                >
+                <div class="relative group">
+                  <span
+                    class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors"
+                    >mail</span
+                  >
+                  <input
+                    class="w-full pl-12 pr-md py-md bg-white border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-0 transition-all outline-none"
+                    id="email"
+                    name="email"
+                    placeholder="doctor@clinic.vn"
+                    type="email"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="space-y-xs">
+              <label
+                class="font-label-md text-label-md text-on-surface-variant ml-1"
+                for="password"
+                >Mật khẩu</label
+              >
+              <div class="relative group">
+                <span
+                  class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors"
+                  >lock</span
+                >
+                <input
+                  class="w-full pl-12 pr-md py-md bg-white border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-0 transition-all outline-none"
+                  id="password"
+                  name="password"
+                  placeholder="••••••••"
+                  type="password"
+                />
+                <button
+                  class="absolute right-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface"
+                  type="button"
+                >
+                  visibility
+                </button>
+              </div>
+            </div>
+            <!-- Confirm Password -->
+            <div class="space-y-xs">
+              <label
+                class="font-label-md text-label-md text-on-surface-variant ml-1"
+                for="confirm_password"
+                >Xác nhận mật khẩu</label
+              >
+              <div class="relative group">
+                <span
+                  class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary transition-colors"
+                  >enhanced_encryption</span
+                >
+                <input
+                  class="w-full pl-12 pr-md py-md bg-white border border-outline-variant rounded-lg font-body-md focus:border-primary focus:ring-0 transition-all outline-none"
+                  id="confirmPassword"
+                  placeholder="••••••••"
+                  type="password"
+                />
+              </div>
+            </div>
+            <!-- Policy Check -->
+            <div class="flex items-start gap-sm py-sm">
+              <input
+                class="mt-1 w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary/20 cursor-pointer"
+                id="terms"
+                type="checkbox"
+              />
+              <label
+                class="font-body-md text-on-surface-variant text-[13px] leading-tight cursor-pointer"
+                for="terms"
+              >
+                Tôi đồng ý với các
+                <a class="text-primary hover:underline font-semibold" href="#"
+                  >Điều khoản sử dụng</a
+                >
+                và
+                <a class="text-primary hover:underline font-semibold" href="#"
+                  >Chính sách bảo mật</a
+                >
+                dữ liệu y tế của MedCheck Clinic.
+              </label>
+            </div>
+            <!-- Submit Action -->
+            <button
+              class="w-full py-md bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-sm"
+              type="submit"
+            >
+              Đăng ký ngay
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <!-- Login Redirect -->
+            <div
+              class="text-center mt-lg pt-md border-t border-outline-variant"
+            >
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Đã có tài khoản?
+                <a
+                  class="text-primary font-semibold hover:underline decoration-2 underline-offset-4 ml-xs"
+                  href="dangnhap.html"
+                  >Đăng nhập ngay</a
+                >
+              </p>
+            </div>
+          </form>
+          <!-- Help Link -->
+          <div class="mt-xl flex justify-center gap-lg">
+            <a
+              class="flex items-center gap-xs font-label-md text-label-md text-outline hover:text-primary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined text-[18px]">help</span>
+              Hỗ trợ kỹ thuật
+            </a>
+            <a
+              class="flex items-center gap-xs font-label-md text-label-md text-outline hover:text-primary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >language</span
+              >
+              Tiếng Việt
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer (Shell Integration from JSON) -->
+    <footer
+      class="bg-surface-container-high border-t border-outline-variant py-lg"
+    >
+      <div
+        class="max-w-container-max mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md"
+      >
+        <span class="font-label-md text-label-md text-on-surface-variant"
+          >© 2024 MedCheck Clinic. Bảo mật dữ liệu y tế theo tiêu chuẩn
+          ISO.</span
+        >
+        <div class="flex gap-lg">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-90"
+            href="#"
+            >Hướng dẫn sử dụng</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-90"
+            href="#"
+            >Chính sách bảo mật</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-90"
+            href="#"
+            >Hỗ trợ kỹ thuật</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script src="../js/dangky.js"></script>
+  </body>
+</html>

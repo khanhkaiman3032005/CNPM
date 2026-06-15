@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Quản lý Thuốc | MedCheck Clinic</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700&amp;family=JetBrains+Mono&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#005eb8",
+              "on-tertiary-container": "#d1dce3",
+              "on-tertiary-fixed-variant": "#3e484e",
+              "on-primary-fixed": "#001b3d",
+              background: "#f9f9ff",
+              "on-surface-variant": "#424752",
+              "tertiary-container": "#566167",
+              "surface-dim": "#cadbfc",
+              "on-surface": "#091c35",
+              "secondary-container": "#41befd",
+              "surface-container-high": "#dfe8ff",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#ecf0ff",
+              "error-container": "#ffdad6",
+              "secondary-fixed": "#c6e7ff",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#001e2d",
+              "secondary-fixed-dim": "#81cfff",
+              tertiary: "#3f494f",
+              "primary-fixed-dim": "#a9c7ff",
+              surface: "#f9f9ff",
+              "on-secondary": "#ffffff",
+              "inverse-surface": "#20314b",
+              "surface-container-low": "#f0f3ff",
+              "tertiary-fixed": "#d9e4eb",
+              "surface-bright": "#f9f9ff",
+              "primary-fixed": "#d6e3ff",
+              "surface-container": "#e7eeff",
+              primary: "#00478d",
+              "on-secondary-container": "#004b69",
+              "on-primary-fixed-variant": "#00468c",
+              "on-secondary-fixed-variant": "#004c6b",
+              secondary: "#00658d",
+              "on-error-container": "#93000a",
+              "surface-tint": "#005db6",
+              "on-primary-container": "#c8daff",
+              "on-background": "#091c35",
+              "tertiary-fixed-dim": "#bdc8cf",
+              "surface-container-highest": "#d6e3ff",
+              "on-error": "#ffffff",
+              "surface-variant": "#d6e3ff",
+              outline: "#727783",
+              "outline-variant": "#c2c6d4",
+              "on-tertiary-fixed": "#131d22",
+              "inverse-primary": "#a9c7ff",
+              "surface-container-lowest": "#ffffff",
+              error: "#ba1a1a",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xs: "4px",
+              md: "16px",
+              "container-max": "1440px",
+              sm: "8px",
+              base: "4px",
+              gutter: "24px",
+              xl: "48px",
+              lg: "24px",
+            },
+            fontFamily: {
+              "headline-md": ["manrope"],
+              "title-lg": ["inter"],
+              "body-lg": ["inter"],
+              "code-sm": ["jetbrainsMono"],
+              "headline-lg": ["manrope"],
+              "body-md": ["inter"],
+              "label-md": ["inter"],
+              "display-lg": ["manrope"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "title-lg": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "code-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "headline-lg": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "600" },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-size: 24px;
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      body {
+        background-color: #f9f9ff;
+        color: #091c35;
+        -webkit-font-smoothing: antialiased;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .interaction-card {
+        border-left: 4px solid #00478d;
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md min-h-screen flex flex-col">
+    <!-- Side Navigation Bar -->
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Top Navigation Bar -->
+      <header
+        class="bg-surface sticky top-0 border-b border-outline-variant z-50"
+      >
+        <div class="flex justify-between items-center w-full px-lg h-16">
+          <div class="flex items-center gap-md">
+            <span class="text-headline-md font-bold text-primary"
+              >MedCheck Clinic</span
+            >
+          </div>
+          <div class="flex items-center gap-md">
+            <button
+              class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high w-10 h-10 rounded-full transition-colors"
+              data-icon="notifications"
+            >
+              notifications
+            </button>
+            <button
+              class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high w-10 h-10 rounded-full transition-colors"
+              data-icon="settings"
+            >
+              settings
+            </button>
+            <div
+              class="h-8 w-px bg-outline-variant mx-xs hidden sm:block"
+            ></div>
+            <div
+              class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high p-xs pr-md rounded-full transition-colors group"
+            >
+              <img
+                alt="User"
+                class="w-8 h-8 rounded-full object-cover border border-outline-variant"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaNVA4djn5OuUUr2ABVg093FatYz8a5022UVd4-8oHYC3FuGYBNf52Dt_6fPhzhz0-7V3Z3UdDPg0P3jAoGup67yMGDeRb4TiJ2r2DmV0W4dxONnV6hcSjpHAyeYlsx8Kscb3UJjwx06FxwpuM79TFZNckK9CPb3jbYtba7nRzHtOwd1S8Xy7AL1fiE1-PqcQSA8W7aC8zEHmXpdGMXB23ixSnA-tHVWIYHiuB5KBLgvoPm78sCzsolql_oS3zNqhW0M91wgx8rJNM"
+              />
+              <span id="currentUser"> Người dùng </span>
+              <span
+                class="material-symbols-outlined text-outline group-hover:text-primary transition-colors"
+                >logout</span
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="flex flex-1">
+        <aside
+          class="w-64 bg-surface-container-low border-r border-outline-variant flex flex-col p-md shrink-0"
+        >
+          <nav class="p-4 space-y-1">
+            <a
+              href="trangchu.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">dashboard</span>
+              <span>Trang chủ</span>
+            </a>
+
+            <a
+              href="QLThuoc.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">medication</span>
+              <span>Quản lý Thuốc</span>
+            </a>
+
+            <a
+              href="QLBenh.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">personal_injury</span>
+              <span>Quản lý Bệnh</span>
+            </a>
+
+            <a
+              href="KTTTThuocBenh.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">warning</span>
+              <span>Tương tác Thuốc - Bệnh</span>
+            </a>
+
+            <a
+              href="LS.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">history</span>
+              <span>Lịch sử Tra cứu</span>
+            </a>
+
+            <a
+              href="dangnhap.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-50 text-red-600 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">logout</span>
+              <span>Đăng xuất</span>
+            </a>
+          </nav>
+        </aside>
+        <!-- Content Container -->
+        <div
+          class="flex-1 flex flex-col overflow-auto custom-scrollbar bg-background"
+        >
+          <main class="p-lg w-full space-y-lg">
+            <!-- Page Header & Search -->
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-md"
+            >
+              <div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                  Quản lý Danh mục Thuốc
+                </h2>
+                <p class="text-on-surface-variant mt-xs">
+                  Hệ thống quản lý dữ liệu thuốc tập trung cho đội ngũ y bác sĩ.
+                </p>
+              </div>
+              <div class="flex items-center gap-sm">
+                <div class="relative w-full md:w-80">
+                  <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+                    data-icon="search"
+                    >search</span
+                  >
+                  <input
+                    id="searchDrug"
+                    class="w-full pl-10 pr-md py-sm bg-white border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md"
+                    placeholder="Tìm tên thuốc, hoạt chất..."
+                    type="text"
+                  />
+                </div>
+                <button
+                  id="btnAddDrug"
+                  class="bg-primary text-on-primary px-lg py-sm rounded-lg font-semibold flex items-center gap-sm hover:opacity-90 transition-all shadow-sm shrink-0"
+                >
+                  <span class="material-symbols-outlined" data-icon="add"
+                    >add</span
+                  >
+                  Thêm thuốc mới
+                </button>
+              </div>
+            </div>
+            <!-- Main Content Wrapper with Uniform Padding and Shadows -->
+            <div class="space-y-lg">
+              <!-- Stats Bento Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+                <div
+                  class="bg-white p-lg border border-outline-variant rounded-xl flex items-center gap-md interaction-card shadow-sm"
+                >
+                  <div
+                    class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center text-primary"
+                  >
+                    <span
+                      class="material-symbols-outlined"
+                      data-icon="inventory_2"
+                      >inventory_2</span
+                    >
+                  </div>
+                  <div>
+                    <p
+                      class="text-label-md text-on-surface-variant uppercase font-bold"
+                    >
+                      Tổng tồn kho
+                    </p>
+                    <h3
+                      id="totalDrugCount"
+                      class="text-headline-md font-bold text-on-surface"
+                    >
+                      0
+                      <span
+                        class="text-body-md font-normal text-on-surface-variant"
+                      >
+                        thuốc
+                      </span>
+                    </h3>
+                  </div>
+                </div>
+                <div
+                  class="bg-white p-lg border border-outline-variant rounded-xl flex items-center gap-md border-l-4 border-l-error shadow-sm"
+                >
+                  <div
+                    class="w-12 h-12 bg-error-container/20 rounded-full flex items-center justify-center text-error"
+                  >
+                    <span class="material-symbols-outlined" data-icon="warning"
+                      >warning</span
+                    >
+                  </div>
+                  <div>
+                    <p
+                      class="text-label-md text-on-surface-variant uppercase font-bold"
+                    >
+                      Thuốc sắp hết hạn
+                    </p>
+                    <h3 class="text-headline-md font-bold text-on-surface">
+                      0
+                      <span
+                        class="text-body-md font-normal text-on-surface-variant"
+                        >loại</span
+                      >
+                    </h3>
+                  </div>
+                </div>
+                <div
+                  class="bg-white p-lg border border-outline-variant rounded-xl flex items-center gap-md border-l-4 border-l-secondary shadow-sm"
+                >
+                  <div
+                    class="w-12 h-12 bg-secondary-container/10 rounded-full flex items-center justify-center text-secondary"
+                  >
+                    <span class="material-symbols-outlined" data-icon="history"
+                      >history</span
+                    >
+                  </div>
+                  <div>
+                    <p
+                      class="text-label-md text-on-surface-variant uppercase font-bold"
+                    >
+                      Cập nhật cuối
+                    </p>
+                    <h3
+                      id="lastUpdate"
+                      class="text-headline-md font-bold text-on-surface"
+                    >
+                      0
+                      <span
+                        class="text-body-md font-normal text-on-surface-variant"
+                        >Hôm nay</span
+                      >
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <!-- Main Data Table Container -->
+              <div
+                class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col"
+              >
+                <div class="overflow-x-auto custom-scrollbar">
+                  <table
+                    class="w-full text-left border-collapse min-w-[1200px]"
+                  >
+                    <thead>
+                      <tr
+                        class="bg-surface-container-high border-b border-outline-variant"
+                      >
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Mã thuốc
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Tên thuốc
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Hoạt chất
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Nhóm thuốc
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Chỉ định
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Chống chỉ định
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold"
+                        >
+                          Tác dụng phụ
+                        </th>
+                        <th
+                          class="p-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold text-center sticky right-0 bg-surface-container-high"
+                        >
+                          Thao tác
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="divide-y divide-outline-variant"
+                      id="drugTableBody"
+                    >
+                      <tr>
+                        <td colspan="8" class="text-center py-4">
+                          Chưa có dữ liệu thuốc
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Table Pagination -->
+                <div
+                  class="p-md bg-surface border-t border-outline-variant flex items-center justify-between"
+                >
+                  <span
+                    id="drugInfo"
+                    class="text-label-md text-on-surface-variant"
+                  >
+                  </span>
+                  <div class="flex items-center gap-xs">
+                    <button
+                      class="p-xs border border-outline-variant rounded hover:bg-surface-container-high transition-colors disabled:opacity-50"
+                      disabled=""
+                    >
+                      <span
+                        class="material-symbols-outlined text-[20px]"
+                        data-icon="chevron_left"
+                        >chevron_left</span
+                      >
+                    </button>
+                    <button
+                      class="px-md py-xs bg-primary text-on-primary rounded text-label-md"
+                    >
+                      1
+                    </button>
+                    <button
+                      class="px-md py-xs border border-outline-variant rounded text-label-md hover:bg-surface-container-high"
+                    >
+                      2
+                    </button>
+                    <button
+                      class="px-md py-xs border border-outline-variant rounded text-label-md hover:bg-surface-container-high"
+                    >
+                      3
+                    </button>
+                    <span class="px-sm text-outline-variant">...</span>
+                    <button
+                      class="px-md py-xs border border-outline-variant rounded text-label-md hover:bg-surface-container-high"
+                    >
+                      32
+                    </button>
+                    <button
+                      class="p-xs border border-outline-variant rounded hover:bg-surface-container-high transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[20px]"
+                        data-icon="chevron_right"
+                        >chevron_right</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <!-- Footer -->
+          <footer
+            class="bg-surface-container-high border-t border-outline-variant py-md mt-auto"
+          >
+            <div style="padding: 10px; text-align: center">
+              © 2026 MedCheck Clinic - Hệ thống tra cứu tương tác thuốc bệnh
+            </div>
+          </footer>
+        </div>
+      </div>
+      <!-- Modal Thêm Thuốc -->
+      <div
+        id="drugModal"
+        class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
+      >
+        <div
+          class="bg-white rounded-2xl shadow-2xl w-[700px] max-h-[90vh] overflow-y-auto"
+        >
+          <!-- Header -->
+          <div class="p-6 border-b">
+            <h2 id="modalTitle" class="text-2xl font-bold text-blue-900">
+              Thêm thuốc mới
+            </h2>
+
+            <p class="text-gray-500 mt-1">Nhập thông tin thuốc vào hệ thống</p>
+          </div>
+
+          <!-- Body -->
+          <div class="p-6 space-y-4">
+            <input
+              id="drug_code"
+              type="text"
+              placeholder="Mã thuốc"
+              class="w-full border rounded-xl p-3"
+            />
+
+            <input
+              id="drug_name"
+              type="text"
+              placeholder="Tên thuốc"
+              class="w-full border rounded-xl p-3"
+            />
+
+            <input
+              id="active_ingredient"
+              type="text"
+              placeholder="Hoạt chất"
+              class="w-full border rounded-xl p-3"
+            />
+
+            <input
+              id="drug_group"
+              type="text"
+              placeholder="Nhóm thuốc"
+              class="w-full border rounded-xl p-3"
+            />
+
+            <textarea
+              id="indication"
+              placeholder="Chỉ định"
+              class="w-full border rounded-xl p-3"
+              rows="3"
+            ></textarea>
+
+            <textarea
+              id="contraindication"
+              placeholder="Chống chỉ định"
+              class="w-full border rounded-xl p-3"
+              rows="3"
+            ></textarea>
+
+            <textarea
+              id="side_effect"
+              placeholder="Tác dụng phụ"
+              class="w-full border rounded-xl p-3"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <!-- Footer -->
+          <div class="flex justify-end gap-3 p-6 border-t">
+            <button
+              id="closeModal"
+              class="px-5 py-2 bg-gray-500 text-white rounded-xl"
+            >
+              Đóng
+            </button>
+
+            <button
+              id="saveDrug"
+              class="px-5 py-2 bg-blue-600 text-white rounded-xl"
+            >
+              Lưu thuốc
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Micro-interaction Scripts -->
+      <script src="../js/qlthuoc.js"></script>
+      <script src="../js/main.js"></script>
+    </div>
+  </body>
+</html>
