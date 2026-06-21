@@ -27,9 +27,9 @@ Database:
 - MySQL
 
  Thành viên
-- 2380601034 - NGUYỄN tRIỆU GIA KHÁNH
+- 2380601034 - NGUYỄN TRIỆU GIA KHÁNH
 - 2380602258 - Nguyễn Quang Tính
-- 2380601767 - hUỲNH CÔNG PHƯỚC
+- 2380601767 - HUỲNH CÔNG PHƯỚC
 - 2380601542 - BÙI PHONG NHẬN 
 
 ## Hướng dẫn chạy
