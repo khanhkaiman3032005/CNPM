@@ -1,3 +1,8 @@
+let allDrugs = [];
+
+let currentPage = 1;
+
+const rowsPerPage = 10;
 let currentDrugId = null;
 document.addEventListener("DOMContentLoaded", async () => {
   const tbody = document.getElementById("drugTableBody");
@@ -7,89 +12,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("../../backend/drugs/getAll.php");
 
-    const drugs = await response.json();
+    allDrugs = await response.json();
 
     document.getElementById(
       "drugInfo"
-    ).innerText = `Hiển thị 1 - ${drugs.length} trên tổng số ${drugs.length} thuốc`;
+    ).innerText = `Hiển thị 1 - ${allDrugs.length} trên tổng số ${allDrugs.length} thuốc`;
 
     document.getElementById("totalDrugCount").innerHTML = `
-${drugs.length}
-<span class="text-body-md font-normal text-on-surface-variant">
-    thuốc
-</span>
-`;
+    ${allDrugs.length}
+    <span class="text-body-md font-normal text-on-surface-variant">
+        thuốc
+    </span>
+    `;
 
     const today = new Date();
 
     document.getElementById("lastUpdate").innerHTML =
       today.toLocaleDateString("vi-VN");
 
-    console.log(drugs);
+    console.log(allDrugs);
 
     tbody.innerHTML = "";
 
-    drugs.forEach((drug) => {
-      tbody.innerHTML += `
-<tr class="hover:bg-surface-container-low transition">
-
-    <td class="p-md font-semibold text-primary">
-        ${drug.drug_code}
-    </td>
-
-    <td class="p-md font-medium">
-        ${drug.drug_name}
-    </td>
-
-    <td class="p-md">
-        ${drug.active_ingredient}
-    </td>
-
-    <td class="p-md">
-        <span
-            class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold"
-        >
-            ${drug.drug_group}
-        </span>
-    </td>
-
-    <td class="p-md max-w-[200px]">
-        ${drug.indication}
-    </td>
-
-    <td class="p-md text-red-600">
-        ${drug.contraindication}
-    </td>
-
-    <td class="p-md text-orange-600">
-        ${drug.side_effect}
-    </td>
-
-    <td class="p-md text-center">
-
-        <div class="flex justify-center gap-2">
-
-             <button
-        onclick="editDrug(${drug.id})"
-        class="bg-yellow-500 text-white px-3 py-1 rounded"
-    >
-        Sửa
-    </button>
-
-    <button
-        onclick="deleteDrug(${drug.id})"
-        class="bg-red-500 text-white px-3 py-1 rounded"
-    >
-        Xóa
-    </button>
-
-        </div>
-
-    </td>
-
-</tr>
-`;
-    });
+    renderDrugTable();
   } catch (error) {
     console.error("Lỗi:", error);
   }
@@ -226,4 +171,108 @@ document.getElementById("searchDrug").addEventListener("keyup", function () {
       row.style.display = "none";
     }
   });
+});
+
+function renderDrugTable() {
+  const tbody = document.getElementById("drugTableBody");
+
+  tbody.innerHTML = "";
+
+  const start = (currentPage - 1) * rowsPerPage;
+
+  const end = start + rowsPerPage;
+
+  const pageData = allDrugs.slice(start, end);
+
+  pageData.forEach((drug) => {
+    tbody.innerHTML += `
+      <tr>
+
+          <td class="p-md font-semibold text-primary">
+              ${drug.drug_code}
+          </td>
+
+          <td class="p-md">
+              ${drug.drug_name}
+          </td>
+
+          <td class="p-md">
+              ${drug.active_ingredient}
+          </td>
+
+          <td class="p-md">
+              <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
+                  ${drug.drug_group}
+              </span>
+          </td>
+
+          <td class="p-md">
+              ${drug.indication}
+          </td>
+
+          <td class="p-md text-red-600">
+              ${drug.contraindication}
+          </td>
+
+          <td class="p-md text-orange-600">
+              ${drug.side_effect}
+          </td>
+
+          <td class="p-md text-center">
+              <button
+                  onclick="editDrug(${drug.id})"
+                  class="bg-yellow-500 text-white px-3 py-1 rounded">
+                  Sửa
+              </button>
+
+              <button
+                  onclick="deleteDrug(${drug.id})"
+                  class="bg-red-500 text-white px-3 py-1 rounded">
+                  Xóa
+              </button>
+          </td>
+
+      </tr>
+      `;
+  });
+
+  document.getElementById(
+    "pageNumberDrug"
+  ).innerText = `${currentPage} / ${Math.ceil(allDrugs.length / rowsPerPage)}`;
+}
+
+document.getElementById("prevPageDrug").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+
+    renderDrugTable();
+  }
+});
+
+document.getElementById("nextPageDrug").addEventListener("click", () => {
+  const totalPages = Math.ceil(allDrugs.length / rowsPerPage);
+
+  if (currentPage < totalPages) {
+    currentPage++;
+
+    renderDrugTable();
+  }
+});
+
+document.getElementById("prevPageDrug").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+
+    renderDrugTable();
+  }
+});
+
+document.getElementById("nextPageDrug").addEventListener("click", () => {
+  const totalPages = Math.ceil(allDrugs.length / rowsPerPage);
+
+  if (currentPage < totalPages) {
+    currentPage++;
+
+    renderDrugTable();
+  }
 });

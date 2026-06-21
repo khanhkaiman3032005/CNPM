@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Quản lý Bệnh - MedCheck Clinic</title>
+    <title>AI Hỗ Trợ Chẩn Đoán</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700&amp;family=JetBrains+Mono&amp;display=swap"
@@ -265,216 +265,94 @@
         </nav>
       </aside>
       <!-- Main Content Area -->
-      <main class="flex-1 p-lg bg-background overflow-x-hidden">
-        <div class="mb-lg flex justify-between items-end">
-          <div>
-            <div class="flex items-center gap-2 text-primary mb-2"></div>
-            <h1 class="font-headline-lg text-headline-lg text-on-surface">
-              Quản lý Danh mục Bệnh
-            </h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant mt-1">
-              Cập nhật và quản lý cơ sở dữ liệu bệnh lý hệ thống theo chuẩn
-              ICD-10.
-            </p>
-          </div>
-          <button
-            id="btnAddDisease"
-            class="bg-primary text-on-primary px-lg py-2 rounded-full flex items-center gap-2"
-          >
-            <span class="material-symbols-outlined"> add_circle </span>
-            Thêm bệnh mới
-          </button>
-        </div>
-        <!-- Dashboard Filter Bar -->
-        <div
-          class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl mb-lg flex flex-wrap gap-md items-center"
-        >
-          <div class="flex-1 min-w-[300px] relative">
-            <span
-              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
-              >search</span
-            >
-            <input
-              id="searchDisease"
-              class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-surface-container-low/30"
-              placeholder="Tìm theo Mã bệnh, Tên bệnh hoặc Nhóm..."
-              type="text"
-            />
-          </div>
-          <select
-            class="bg-surface-container-low border border-outline-variant px-md py-2 rounded-lg text-body-md min-w-[180px] focus:border-primary outline-none"
-          >
-            <option>Tất cả Nhóm bệnh</option>
-            <option>Truyền nhiễm</option>
-            <option>Tim mạch</option>
-            <option>Hô hấp</option>
-            <option>Thần kinh</option>
-          </select>
-          <button
-            class="border border-outline-variant px-md py-2 rounded-lg flex items-center gap-2 hover:bg-surface-container-high transition-all text-on-surface-variant"
-          >
-            <span class="material-symbols-outlined">filter_list</span>
-            Lọc nâng cao
-          </button>
-        </div>
-        <!-- Disease Table Container -->
-        <div
-          class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm"
-        >
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr
-                  class="bg-surface-container-high text-on-surface-variant font-label-md uppercase tracking-wider text-label-md"
-                >
-                  <th
-                    class="px-lg py-4 font-semibold border-b border-outline-variant"
-                  >
-                    Mã bệnh
-                  </th>
-                  <th
-                    class="px-lg py-4 font-semibold border-b border-outline-variant"
-                  >
-                    Tên bệnh
-                  </th>
-                  <th
-                    class="px-lg py-4 font-semibold border-b border-outline-variant"
-                  >
-                    Mô tả
-                  </th>
-                  <th
-                    class="px-lg py-4 font-semibold border-b border-outline-variant"
-                  >
-                    Triệu chứng
-                  </th>
-                  <th
-                    class="px-lg py-4 font-semibold border-b border-outline-variant"
-                  >
-                    Nhóm bệnh
-                  </th>
-                  <th
-                    class="px-lg py-4 font-semibold border-b border-outline-variant text-right"
-                  >
-                    Thao tác
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                class="text-body-md divide-y divide-outline-variant"
-                id="diseaseTableBody"
-              >
-                <tr>
-                  <td colspan="7" class="text-center py-4">
-                    Chưa có dữ liệu bệnh
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- Pagination -->
-          <div
-            class="bg-surface-container-low px-lg py-4 flex justify-between items-center border-t border-outline-variant"
-          >
-            <span
-              id="diseaseInfo"
-              class="text-label-md text-on-surface-variant"
-            >
-              Hiển thị 0 bệnh lý
-            </span>
-            <div class="flex items-center gap-2">
-              <button id="prevPageDisease" class="px-3 py-2 border rounded">
-                ←
-              </button>
+      <main class="flex-1 p-8 bg-slate-50">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+          <h1 class="text-4xl font-bold text-blue-700 mb-2">
+            AI Hỗ Trợ Chẩn Đoán
+          </h1>
 
-              <span id="pageNumberDisease" class="px-4"> 1/1 </span>
+          <p class="text-gray-500 mb-6">
+            Hệ thống hỗ trợ bác sĩ phân tích triệu chứng dựa trên dữ liệu bệnh
+            trong MedCheck Clinic
+          </p>
 
-              <button id="nextPageDisease" class="px-3 py-2 border rounded">
-                →
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Summary Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-lg mt-xl">
-          <div
-            class="bg-primary-container p-lg rounded-xl border border-primary/20 shadow-sm relative overflow-hidden"
-          >
-            <div class="flex justify-between items-start mb-md relative z-10">
-              <span
-                class="material-symbols-outlined text-on-primary-container text-[32px]"
-                >biotech</span
-              >
-              <span
-                class="bg-on-primary-container/20 text-on-primary-container px-2 py-1 rounded text-label-md font-bold"
-                >+12%</span
-              >
-            </div>
-            <h3
-              class="text-on-primary-container font-headline-md relative z-10"
-            >
-              Tổng số bệnh lý
-            </h3>
-            <p
-              id="totalDiseaseCount"
-              class="text-on-primary-container text-display-lg font-bold relative z-10"
-            >
-              0
-            </p>
-            <span
-              class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-on-primary-container/5 rotate-12"
-              >database</span
-            >
-          </div>
-          <div
-            class="bg-secondary-container p-lg rounded-xl border border-secondary/20 shadow-sm relative overflow-hidden"
-          >
-            <div class="flex justify-between items-start mb-md relative z-10">
-              <span
-                class="material-symbols-outlined text-on-secondary-container text-[32px]"
-                >coronavirus</span
-              >
-            </div>
-            <h3
-              class="text-on-secondary-container font-headline-md relative z-10"
-            >
-              Tổng nhóm bệnh
-            </h3>
-            <p
-              id="groupDiseaseCount"
-              class="text-on-secondary-container text-display-lg font-bold relative z-10"
-            >
-              0
-            </p>
-            <span
-              class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-on-secondary-container/5 rotate-12"
-              >science</span
-            >
-          </div>
-          <div
-            class="bg-surface-container-highest p-lg rounded-xl border border-outline-variant relative overflow-hidden group shadow-sm"
-          >
-            <div class="relative z-10">
-              <div class="flex justify-between items-start mb-md">
-                <span class="material-symbols-outlined text-primary text-[32px]"
-                  >pending_actions</span
-                >
-              </div>
-              <h3 class="text-on-surface font-headline-md">Đang chờ duyệt</h3>
-              <p class="text-on-surface-variant text-display-lg font-bold">0</p>
-              <button
-                class="mt-md text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all"
-              >
-                Xem tất cả
-                <span class="material-symbols-outlined">arrow_right_alt</span>
-              </button>
-            </div>
+          <div class="space-y-4">
             <div
-              class="absolute -right-4 -bottom-4 opacity-10 scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700"
+              class="bg-gradient-to-r from-blue-600 to-cyan-500 p-6 rounded-2xl text-white mb-6"
             >
-              <span class="material-symbols-outlined text-[120px]"
-                >medical_services</span
-              >
+              <div class="flex items-center gap-3">
+                <div class="text-5xl">🤖</div>
+
+                <div>
+                  <h2 class="text-3xl font-bold">AI Medical Assistant</h2>
+
+                  <p class="opacity-90 mt-1">
+                    Hỗ trợ bác sĩ phân tích triệu chứng và đưa ra bệnh nghi ngờ
+                  </p>
+                </div>
+              </div>
             </div>
+
+            <div class="space-y-5">
+              <div>
+                <label class="block font-semibold mb-2 text-gray-700">
+                  🩺 Triệu chứng bệnh nhân
+                </label>
+
+                <textarea
+                  id="symptoms"
+                  rows="5"
+                  class="w-full border-2 border-blue-200 rounded-2xl p-4 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  placeholder="Ví dụ: ho, sốt, khó thở..."
+                ></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-semibold mb-2 text-gray-700">
+                    💊 Thuốc đang sử dụng
+                  </label>
+
+                  <input
+                    id="medicine"
+                    class="w-full border-2 border-blue-200 rounded-2xl p-3"
+                    placeholder="Paracetamol..."
+                  />
+                </div>
+
+                <div>
+                  <label class="block font-semibold mb-2 text-gray-700">
+                    🏥 Bệnh nền
+                  </label>
+
+                  <input
+                    id="background"
+                    class="w-full border-2 border-blue-200 rounded-2xl p-3"
+                    placeholder="Tăng huyết áp..."
+                  />
+                </div>
+              </div>
+
+              <button
+                id="analyzeBtn"
+                class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition"
+              >
+                ✨ Phân tích bằng AI
+              </button>
+            </div>
+          </div>
+          <div id="resultBox" class="hidden mt-8">
+            <div
+              class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-6 rounded-2xl mb-5"
+            >
+              <h2 class="text-2xl font-bold">Kết quả phân tích AI</h2>
+
+              <p class="opacity-90">
+                Hệ thống đã phân tích triệu chứng và đưa ra kết quả dự đoán
+              </p>
+            </div>
+
+            <div id="aiResult"></div>
           </div>
         </div>
       </main>
@@ -534,7 +412,7 @@
           ></textarea>
 
           <textarea
-            id="symptoms"
+            id="disease_symptoms"
             placeholder="Triệu chứng"
             class="w-full border rounded-xl p-3"
             rows="3"
@@ -558,7 +436,7 @@
         </div>
       </div>
     </div>
-    <script src="../js/qlbenh.js"></script>
+    <script src="../js/aichandoan.js"></script>
     <script src="../js/main.js"></script>
   </body>
 </html>

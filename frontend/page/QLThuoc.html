@@ -243,6 +243,14 @@
             </a>
 
             <a
+              href="AIChanDoan.html"
+              class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
+            >
+              <span class="material-symbols-outlined">psychology</span>
+              <span>AI Hỗ Trợ Chẩn Đoán</span>
+            </a>
+
+            <a
               href="LS.html"
               class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-blue-50 text-base font-medium"
             >
@@ -460,51 +468,17 @@
                 <div
                   class="p-md bg-surface border-t border-outline-variant flex items-center justify-between"
                 >
-                  <span
-                    id="drugInfo"
-                    class="text-label-md text-on-surface-variant"
-                  >
-                  </span>
-                  <div class="flex items-center gap-xs">
-                    <button
-                      class="p-xs border border-outline-variant rounded hover:bg-surface-container-high transition-colors disabled:opacity-50"
-                      disabled=""
-                    >
-                      <span
-                        class="material-symbols-outlined text-[20px]"
-                        data-icon="chevron_left"
-                        >chevron_left</span
-                      >
+                  <span id="drugInfo"></span>
+
+                  <div class="flex gap-2">
+                    <button id="prevPageDrug" class="px-3 py-1 border rounded">
+                      Trước
                     </button>
-                    <button
-                      class="px-md py-xs bg-primary text-on-primary rounded text-label-md"
-                    >
-                      1
-                    </button>
-                    <button
-                      class="px-md py-xs border border-outline-variant rounded text-label-md hover:bg-surface-container-high"
-                    >
-                      2
-                    </button>
-                    <button
-                      class="px-md py-xs border border-outline-variant rounded text-label-md hover:bg-surface-container-high"
-                    >
-                      3
-                    </button>
-                    <span class="px-sm text-outline-variant">...</span>
-                    <button
-                      class="px-md py-xs border border-outline-variant rounded text-label-md hover:bg-surface-container-high"
-                    >
-                      32
-                    </button>
-                    <button
-                      class="p-xs border border-outline-variant rounded hover:bg-surface-container-high transition-colors"
-                    >
-                      <span
-                        class="material-symbols-outlined text-[20px]"
-                        data-icon="chevron_right"
-                        >chevron_right</span
-                      >
+
+                    <span id="pageNumberDrug" class="px-3 py-1"> 1 </span>
+
+                    <button id="nextPageDrug" class="px-3 py-1 border rounded">
+                      Sau
                     </button>
                   </div>
                 </div>

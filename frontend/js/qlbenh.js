@@ -1,4 +1,12 @@
 let currentDiseaseId = null;
+let allDiseases = [];
+
+let currentPage = 1;
+
+const rowsPerPage = 10;
+
+console.log("QLBENH DA LOAD");
+console.log("rowsPerPage =", rowsPerPage);
 
 document.addEventListener("DOMContentLoaded", loadDiseases);
 
@@ -8,7 +16,9 @@ async function loadDiseases() {
   try {
     const response = await fetch("../../backend/diseases/getAll.php");
 
-    const diseases = await response.json();
+    allDiseases = await response.json();
+
+    const diseases = allDiseases;
 
     tbody.innerHTML = "";
 
@@ -44,51 +54,7 @@ async function loadDiseases() {
       return;
     }
 
-    diseases.forEach((disease) => {
-      tbody.innerHTML += `
-                <tr>
-
-                    <td class="px-lg py-4">
-                        ${disease.disease_code}
-                    </td>
-
-                    <td class="px-lg py-4 font-semibold">
-                        ${disease.disease_name}
-                    </td>
-
-                    <td class="px-lg py-4">
-                        ${disease.description}
-                    </td>
-
-                    <td class="px-lg py-4">
-                        ${disease.symptoms}
-                    </td>
-
-                    <td class="px-lg py-4">
-                        ${disease.disease_group}
-                    </td>
-
-                    <td class="px-lg py-4 text-right">
-
-                        <button
-                            onclick="editDisease(${disease.id})"
-                            class="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
-                        >
-                            Sửa
-                        </button>
-
-                        <button
-                            onclick="deleteDisease(${disease.id})"
-                            class="bg-red-500 text-white px-3 py-1 rounded"
-                        >
-                            Xóa
-                        </button>
-
-                    </td>
-
-                </tr>
-            `;
-    });
+    renderDiseaseTable();
   } catch (error) {
     console.error(error);
   }
@@ -225,6 +191,70 @@ function editDisease(id) {
   modal.classList.remove("hidden");
   modal.classList.add("flex");
 }
+function renderDiseaseTable() {
+  const tbody = document.getElementById("diseaseTableBody");
+
+  tbody.innerHTML = "";
+
+  const start = (currentPage - 1) * rowsPerPage;
+
+  const end = start + rowsPerPage;
+
+  const pageData = allDiseases.slice(start, end);
+
+  pageData.forEach((disease) => {
+    tbody.innerHTML += `
+      <tr>
+
+        <td class="px-lg py-4">
+          ${disease.disease_code}
+        </td>
+
+        <td class="px-lg py-4 font-semibold">
+          ${disease.disease_name}
+        </td>
+
+        <td class="px-lg py-4">
+          ${disease.description}
+        </td>
+
+        <td class="px-lg py-4">
+          ${disease.symptoms}
+        </td>
+
+        <td class="px-lg py-4">
+          ${disease.disease_group}
+        </td>
+
+        <td class="px-lg py-4 text-right">
+
+          <button
+            onclick="editDisease(${disease.id})"
+            class="bg-yellow-500 text-white px-3 py-1 rounded mr-2">
+            Sửa
+          </button>
+
+          <button
+            onclick="deleteDisease(${disease.id})"
+            class="bg-red-500 text-white px-3 py-1 rounded">
+            Xóa
+          </button>
+
+        </td>
+
+      </tr>
+    `;
+  });
+
+  document.getElementById("diseaseInfo").innerText = `Hiển thị ${
+    start + 1
+  } - ${Math.min(end, allDiseases.length)}
+     trong số ${allDiseases.length} bệnh lý`;
+
+  document.getElementById(
+    "pageNumberDisease"
+  ).innerText = `${currentPage}/${Math.ceil(allDiseases.length / rowsPerPage)}`;
+}
 
 document.getElementById("searchDisease").addEventListener("keyup", function () {
   const keyword = this.value.toLowerCase();
@@ -236,4 +266,22 @@ document.getElementById("searchDisease").addEventListener("keyup", function () {
 
     row.style.display = text.includes(keyword) ? "" : "none";
   });
+});
+
+document.getElementById("prevPageDisease").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+
+    renderDiseaseTable();
+  }
+});
+
+document.getElementById("nextPageDisease").addEventListener("click", () => {
+  const totalPages = Math.ceil(allDiseases.length / rowsPerPage);
+
+  if (currentPage < totalPages) {
+    currentPage++;
+
+    renderDiseaseTable();
+  }
 });
